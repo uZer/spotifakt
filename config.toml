@@ -1,3 +1,31 @@
+# Site settings
 baseURL = "https://spotifakt.core.ypiolet.fr/"
 languageCode = "en-us"
 title = "Spotifakt - Playlists by SCHEMATiCWiZARD"
+theme = "spotifakt-theme"
+googleAnalytics = "UA-XXXXXXXX-Y"
+
+contentdir = "content"
+datadir = "data"
+layoutdir = "layouts"
+publishdir = "public"
+
+# [params]
+#     # Meta
+#     title = "Spotifakt - Playlists by SCHEMATiCWiZARD"
+#     subtitle = "Finely selected music for curious and independent minds"
+#     author = "Youenn Piolet"
+#     description = "Fork from Hugrid - grid theme for Hugo"
+#     keywords = "Hugo, Hugo theme, grid theme, portfolio, bookmarks, collection, contacts"
+#
+#     # Body background color
+#     bodybgcolor = "#f9f9f9"
+#
+#     # Preview container button text
+#     buttontext = "Get the theme"
+#
+#     # Footer text
+#     footertext = "Made by [Codrops](http://tympanus.net/codrops/2013/03/19/thumbnail-grid-with-expanding-preview/), [Hugo](http://gohugo.io) and [me](https://github.com/aerohub)"
+#
+#     # add extra-css
+#     # custom_css = ['css/extra1.css', 'css/extra2.css']

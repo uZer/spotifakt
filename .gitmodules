@@ -1,0 +1,3 @@
+[submodule "themes/spotifakt-theme"]
+	path = themes/spotifakt-theme
+	url = https://github.com/uZer/spotifakt-theme.git

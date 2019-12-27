@@ -57,6 +57,7 @@ func main() {
 	}
 
 	// Print results
+	var data []*spotify.FullPlaylist
 	for page := 1; ; page++ {
 		for _, pl := range pages.Playlists {
 			fields := "name,description,followers,images,external_urls,tracks.total"
@@ -64,14 +65,7 @@ func main() {
 			if err != nil {
 				log.Fatalf("Couldn't get full playlist metadata: %v", err)
 			}
-
-			// Output a filtered JSON
-			b, err := json.Marshal(playlist)
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
-			fmt.Println(string(b))
+			data = append(data, playlist)
 		}
 		err = client.NextPage(pages)
 		if err == spotify.ErrNoMorePages {
@@ -81,4 +75,11 @@ func main() {
 			log.Fatal(err)
 		}
 	}
+	// Output a filtered JSON
+	b, err := json.Marshal(data)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(b))
 }

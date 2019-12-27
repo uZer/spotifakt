@@ -1,0 +1,22 @@
+---
+version: "3"
+services:
+  spotifakt:
+    build:
+      context: ./docker/hugo
+      args:
+        HUGO_GID: 1000
+        HUGO_UID: 1000
+    image: spotifakt
+    # depends_on:
+      # - spotifakt-data
+    ports:
+      - 1313:1313
+    volumes:
+      - .:/app:rw
+
+  # spotifakt-data:
+  #   build: ./docker/data
+  #   image: spotifakt-data
+  #   volumes:
+  #     - .:/app:rw

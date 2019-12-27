@@ -4,7 +4,7 @@
 // See .env.dist for specifications
 //
 // Usage:
-//   go run main.go --user=<your spotify user id>
+//   go run . --user=<your spotify user id>
 package main
 
 import (
@@ -19,9 +19,10 @@ import (
 	"os"
 )
 
-var userID = flag.String("user", "_u.zer_", "the Spotify user ID to look up")
+var userID = flag.String("user", "_u.zer_", "Your Spotify user ID")
 
 func main() {
+	// Env checking
 	flag.Parse()
 	if *userID == "" {
 		fmt.Fprintf(os.Stderr, "Error: missing user ID\n")
@@ -30,7 +31,7 @@ func main() {
 	}
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal("Error loading environment variables")
 	}
 
 	// Connect
@@ -56,8 +57,8 @@ func main() {
 		log.Fatalf("Couldn't get features playlists: %v", err)
 	}
 
-	// Print results
-	var data []*spotify.FullPlaylist
+	// Convert data
+	var data []*Playlist
 	for page := 1; ; page++ {
 		for _, pl := range pages.Playlists {
 			fields := "name,description,followers,images,external_urls,tracks.total"
@@ -65,7 +66,7 @@ func main() {
 			if err != nil {
 				log.Fatalf("Couldn't get full playlist metadata: %v", err)
 			}
-			data = append(data, playlist)
+			data = append(data, NewPlaylist(playlist))
 		}
 		err = client.NextPage(pages)
 		if err == spotify.ErrNoMorePages {
@@ -75,7 +76,8 @@ func main() {
 			log.Fatal(err)
 		}
 	}
-	// Output a filtered JSON
+
+	// Output Hugo data
 	b, err := json.Marshal(data)
 	if err != nil {
 		fmt.Println(err)
